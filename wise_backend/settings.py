@@ -11,6 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# read the password from .env file
+
+if not load_dotenv():
+    raise ValueError("Could not load .env file")
+PASSWORD = os.getenv("POSTGRESQL_PASSWORD")
+if PASSWORD is None:
+    raise ValueError("POSTGRESQL_PASSWORD not found in .env file")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,9 +85,13 @@ WSGI_APPLICATION = 'wise_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wise',
+        'USER': 'postgres',
+        'PASSWORD': PASSWORD,
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
 
 
