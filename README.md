@@ -17,7 +17,7 @@ cd wise_backend
 1. Ensure you have PostgreSQL installed on your system.
 2. Create a new PostgreSQL database named 'wise':
 ```bash
-(wise-backend) $ psql -U postgres -c "createdb wise"
+(wise-backend) $ psql -U postgres -c "CREATE DATABASE wise;"
 ```
 3. Set up your database credentials in a .env file in the project root:
 ```bash
