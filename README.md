@@ -42,7 +42,7 @@ python manage.py seed_emotion_records
 
 ## Run the server
 ```bash
-python manage.py seed_emotion_records
+python manage.py runserver
 ```
 
 ## API Documentation
