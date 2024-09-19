@@ -8,20 +8,16 @@ This is the backend for the Wise Assistant project, built with Django and Postgr
 git clone <repository-url>
 cd wise_backend
 ```
-3. Create a virtual environment:
+3. Create a virtual environment by conda:
 ```bash
-python -m venv venv
-source venv/Scripts/activate
+(base) $ conda create -f environment.yml
 ```
-4. Install dependencies:
+4. Set up the database:
 ```bash
-pip install -r requirements.txt
+(base) $ conda activate wise-backend
+(wise-backend) $ python manage.py migrate
 ```
-5. Set up the database:
-```bash
-python manage.py migrate
-```
-6. Start the development server:
+5. Start the development server:
 ```bash
 python manage.py runserver
 ```
