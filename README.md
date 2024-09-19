@@ -19,7 +19,7 @@ cd wise_backend
 ```
 5. Start the development server:
 ```bash
-python manage.py runserver
+(wise-backend) $ python manage.py runserver
 ```
 
 ## Database Setup
