@@ -10,7 +10,7 @@ cd wise_backend
 ```
 3. Create a virtual environment by conda:
 ```bash
-(base) $ conda create -f environment.yml
+(base) $ conda create -n wise-backend -f environment.yml
 ```
 4. Set up the database:
 ```bash
