@@ -1,0 +1,344 @@
+openapi: 3.0.3
+info:
+  title: Wise API
+  version: 1.0.0
+  description: API for Wise Assistant Backend
+paths:
+  /aggregate/:
+    get:
+      operationId: aggregate_list
+      parameters:
+      - in: query
+        name: created_at
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created_at__date__gt
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created_at__date__range
+        schema:
+          type: array
+          items:
+            type: string
+            format: date
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created_at__range
+        schema:
+          type: array
+          items:
+            type: string
+            format: date-time
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created_at__time__gt
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: created_at__time__range
+        schema:
+          type: array
+          items:
+            type: string
+            format: time
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created_at__year
+        schema:
+          type: number
+      - in: query
+        name: emotion
+        schema:
+          type: integer
+      - in: query
+        name: func
+        schema:
+          type: string
+          enum:
+          - average
+          - count
+        description: 'The aggregation function to apply. Supported values: count,
+          average.'
+        required: true
+      tags:
+      - aggregate
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmotionRecordAggregate'
+          description: ''
+  /emotionrecords/:
+    get:
+      operationId: emotionrecords_list
+      parameters:
+      - in: query
+        name: created_at
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created_at__date__gt
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created_at__date__range
+        schema:
+          type: array
+          items:
+            type: string
+            format: date
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created_at__range
+        schema:
+          type: array
+          items:
+            type: string
+            format: date-time
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created_at__time__gt
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: created_at__time__range
+        schema:
+          type: array
+          items:
+            type: string
+            format: time
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created_at__year
+        schema:
+          type: number
+      - in: query
+        name: emotion
+        schema:
+          type: integer
+      tags:
+      - emotionrecords
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmotionRecord'
+          description: ''
+    post:
+      operationId: emotionrecords_create
+      tags:
+      - emotionrecords
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmotionRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmotionRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmotionRecord'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmotionRecord'
+          description: ''
+  /emotionrecords/{id}/:
+    get:
+      operationId: emotionrecords_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this emotion record.
+        required: true
+      tags:
+      - emotionrecords
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmotionRecord'
+          description: ''
+    put:
+      operationId: emotionrecords_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this emotion record.
+        required: true
+      tags:
+      - emotionrecords
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmotionRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmotionRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmotionRecord'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmotionRecord'
+          description: ''
+    patch:
+      operationId: emotionrecords_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this emotion record.
+        required: true
+      tags:
+      - emotionrecords
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmotionRecord'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmotionRecord'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmotionRecord'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmotionRecord'
+          description: ''
+    delete:
+      operationId: emotionrecords_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this emotion record.
+        required: true
+      tags:
+      - emotionrecords
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    EmotionRecord:
+      type: object
+      properties:
+        emotion:
+          type: integer
+        confidence:
+          type: number
+          format: double
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - confidence
+      - created_at
+      - emotion
+    EmotionRecordAggregate:
+      type: object
+      properties:
+        emotion__name:
+          type: string
+        result:
+          type: number
+          format: double
+      required:
+      - emotion__name
+      - result
+    PatchedEmotionRecord:
+      type: object
+      properties:
+        emotion:
+          type: integer
+        confidence:
+          type: number
+          format: double
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
