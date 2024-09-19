@@ -12,21 +12,12 @@ cd wise_backend
 ```bash
 (base) $ conda env create -f environment.yml
 ```
-4. Set up the database:
-```bash
-(base) $ conda activate wise-backend
-(wise-backend) $ python manage.py migrate
-```
-5. Start the development server:
-```bash
-(wise-backend) $ python manage.py runserver
-```
 
 ## Database Setup
 1. Ensure you have PostgreSQL installed on your system.
 2. Create a new PostgreSQL database named 'wise':
 ```bash
-createdb wise
+(wise-backend) $ psql -U postgres -c "createdb wise"
 ```
 3. Set up your database credentials in a .env file in the project root:
 ```bash
@@ -45,6 +36,11 @@ python manage.py migrate
 ```
 
 6. (Optional) Seed the database with initial data:
+```bash
+python manage.py seed_emotion_records
+```
+
+## Run the server
 ```bash
 python manage.py seed_emotion_records
 ```
