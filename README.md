@@ -25,3 +25,36 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+
+## Database Setup
+1. Ensure you have PostgreSQL installed on your system.
+2. Create a new PostgreSQL database named 'wise':
+```bash
+createdb wise
+```
+3. Set up your database credentials in a .env file in the project root:
+```bash
+POSTGRESQL_PASSWORD=your_password_here
+```
+
+4. Run the database setup script:
+```bash
+cd db
+.\run.bat
+```
+
+5. Apply Django migrations:
+```bash
+python manage.py migrate
+```
+
+6. (Optional) Seed the database with initial data:
+```bash
+python manage.py seed_emotion_records
+```
+
+## API Documentation
+The API documentation is available at:
+```bash
+http://127.0.0.1:8000/api/schema/swagger-ui/
+```
